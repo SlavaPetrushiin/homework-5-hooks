@@ -22,4 +22,47 @@ import React, { useState } from "react";
     https://reactjs.org/docs/hooks-reference.html#usereducer
 */
 
-export const Form = () => {};
+
+
+export const Form = () => {
+	let [email, changeEmail] = useState('');
+	let [password, changePassword] = useState('');
+	let [authorization, authorizationClick] = useState(false);
+
+	function onChangeEmail(event) {
+		changeEmail(event.target.value)
+	}
+
+	function onChangePassword(event){
+		changePassword(event.target.value)
+	}	
+
+	function onClickHandler(event){
+		event.preventDefault();
+		if(email !== "" && password !== ""){
+			authorizationClick(true);
+		}
+	}
+
+	return (
+		<div>
+			<input
+				type="email"
+				value="email"
+				data-testid='input-email'
+				onChange={onChangeEmail}
+			/>
+			<input
+				type="password"
+				value="password"
+				data-testid='input-password'
+				onChange={onChangePassword}
+			/>
+			<button onClick={onClickHandler} data-testid='submit'>Ok</button>>
+			{(authorization)
+				? <div data-testid="success-message">Вы вошли</div>
+				: null
+				}
+		</div>
+	)
+};
